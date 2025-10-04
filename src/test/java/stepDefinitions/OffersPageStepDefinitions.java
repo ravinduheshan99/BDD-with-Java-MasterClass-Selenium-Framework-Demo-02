@@ -1,8 +1,9 @@
 package stepDefinitions;
 
 import io.cucumber.java.en.Then;
-import org.openqa.selenium.By;
 import org.testng.Assert;
+import pageObjects.LandingPage;
+import pageObjects.OffersPage;
 import utils.TestContextSetup;
 
 import java.util.Iterator;
@@ -17,19 +18,25 @@ public class OffersPageStepDefinitions {
         this.testContextSetup=testContextSetup;
     }
 
+    public void switchToOffersPage(){
+        if (!(testContextSetup.driver.getCurrentUrl().equals("https://rahulshettyacademy.com/seleniumPractise/#/offers"))){
+            LandingPage landingPage = testContextSetup.pageObjectManager.getLandingPage();
+            landingPage.selectTopDeals();
+            Set<String> s1 = testContextSetup.driver.getWindowHandles();
+            Iterator<String> i1 = s1.iterator();
+            String parentWindow = i1.next();
+            String childWindow = i1.next();
+            testContextSetup.driver.switchTo().window(childWindow);
+        }
+
+    }
+
     @Then("user searched for same shortname {string} in offers page and extracted actual name of product")
     public void user_searched_for_same_shortname_in_offers_page_to_check_if_product_exist(String shortName) throws InterruptedException {
-        testContextSetup.driver.findElement(By.linkText("Top Deals")).click();
-        Set<String> s1 = testContextSetup.driver.getWindowHandles();
-        Iterator<String> i1 = s1.iterator();
-        String parentWindow = i1.next();
-        String childWindow = i1.next();
-
-        testContextSetup.driver.switchTo().window(childWindow);
-
-        testContextSetup.driver.findElement(By.xpath("//input[@type='search']")).sendKeys(shortName);
-        Thread.sleep(2000);
-        actualProductNameOffersPage = testContextSetup.driver.findElement(By.cssSelector("tr td:nth-child(1)")).getText();
+        switchToOffersPage();
+        OffersPage offersPage = testContextSetup.pageObjectManager.getOffersPage();
+        offersPage.searchItem(shortName);
+        actualProductNameOffersPage = offersPage.getProductName();
         System.out.println(actualProductNameOffersPage+" is extracted from Offers Page");
     }
 
