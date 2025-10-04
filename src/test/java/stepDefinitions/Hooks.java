@@ -15,6 +15,7 @@ public class Hooks {
 
     @After
     public void AfterScenario() throws IOException {
+        System.out.println("AfterScenario : Method Executed");
         testContextSetup.testBase.WebDriverManager().quit();
     }
 }

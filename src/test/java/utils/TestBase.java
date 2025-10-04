@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Properties;
 
 public class TestBase {
@@ -21,8 +22,6 @@ public class TestBase {
             if (properties.getProperty("browser").equalsIgnoreCase("chrome")){
                 System.setProperty("webdriver.chrome,driver", System.getProperty("user.dir")+"\\src\\main\\resources\\ChormeDriver\\chromedriver.exe");
                 driver = new ChromeDriver();
-                driver.get(url);
-                return driver;
             }
             if (properties.getProperty("browser").equalsIgnoreCase("firefox")) {
                 //firefox code
@@ -30,6 +29,9 @@ public class TestBase {
             if (properties.getProperty("browser").equalsIgnoreCase("edge")) {
                 //edge code
             }
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+            driver.get(url);
+            return driver;
         }
         return driver;
     }

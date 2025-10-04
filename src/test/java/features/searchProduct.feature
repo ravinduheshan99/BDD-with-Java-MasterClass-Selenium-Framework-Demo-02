@@ -1,5 +1,6 @@
 Feature: Search and Place the Order for Products
 
+  @SearchTest
   Scenario Outline: Search Experience product search in both home and offers page
     Given user is on GreenKart landing page
     When user searched for shortname <Name> and extracted actual name of product

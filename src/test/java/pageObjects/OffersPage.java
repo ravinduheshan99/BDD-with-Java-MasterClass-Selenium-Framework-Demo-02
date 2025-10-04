@@ -15,11 +15,13 @@ public class OffersPage {
     private By productName = By.cssSelector("tr td:nth-child(1)");
 
     public void searchItem(String productNameSearching) throws InterruptedException {
+        System.out.println("searchItem : Method Executed");
         driver.findElement(search).sendKeys(productNameSearching);
         Thread.sleep(2000);
     }
 
     public String getProductName(){
+        System.out.println("getProductName : Method Executed");
         return driver.findElement(productName).getText();
     }
 }
