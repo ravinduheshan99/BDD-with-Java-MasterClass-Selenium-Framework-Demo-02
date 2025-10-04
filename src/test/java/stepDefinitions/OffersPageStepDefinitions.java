@@ -6,9 +6,6 @@ import pageObjects.LandingPage;
 import pageObjects.OffersPage;
 import utils.TestContextSetup;
 
-import java.util.Iterator;
-import java.util.Set;
-
 public class OffersPageStepDefinitions {
 
     public String actualProductNameOffersPage;
@@ -19,14 +16,10 @@ public class OffersPageStepDefinitions {
     }
 
     public void switchToOffersPage(){
-        if (!(testContextSetup.driver.getCurrentUrl().equals("https://rahulshettyacademy.com/seleniumPractise/#/offers"))){
-            LandingPage landingPage = testContextSetup.pageObjectManager.getLandingPage();
-            landingPage.selectTopDeals();
-            Set<String> s1 = testContextSetup.driver.getWindowHandles();
-            Iterator<String> i1 = s1.iterator();
-            String parentWindow = i1.next();
-            String childWindow = i1.next();
-            testContextSetup.driver.switchTo().window(childWindow);
+        LandingPage landingPage = testContextSetup.pageObjectManager.getLandingPage();
+        landingPage.selectTopDealsPage();
+        if (!(landingPage.driver.getCurrentUrl().equals("https://rahulshettyacademy.com/seleniumPractise/#/offers"))){
+            testContextSetup.genericUtils.switchWindowToChild();
         }
 
     }

@@ -24,7 +24,7 @@ public class LandingPage {
         return driver.findElement(productName).getText().split("-")[0].trim();
     }
 
-    public void selectTopDeals(){
+    public void selectTopDealsPage(){
         driver.findElement(topDeals).click();
     }
 

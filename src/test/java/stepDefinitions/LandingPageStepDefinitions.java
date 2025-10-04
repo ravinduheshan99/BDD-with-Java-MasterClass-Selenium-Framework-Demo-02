@@ -2,7 +2,6 @@ package stepDefinitions;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.chrome.ChromeDriver;
 import pageObjects.LandingPage;
 import utils.TestContextSetup;
 
@@ -16,9 +15,7 @@ public class LandingPageStepDefinitions {
 
     @Given("user is on GreenKart landing page")
     public void user_is_on_green_kart_landing_page() {
-        System.setProperty("webdriver.chrome,driver", "C:\\Repositories\\My_Upwork_Projects\\ChromeDriver\\chromedriver.exe");
-        testContextSetup.driver = new ChromeDriver();
-        testContextSetup.driver.get("https://rahulshettyacademy.com/seleniumPractise/#/");
+
     }
 
     @When("user searched for shortname {string} and extracted actual name of product")
