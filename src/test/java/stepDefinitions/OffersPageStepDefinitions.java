@@ -24,7 +24,7 @@ public class OffersPageStepDefinitions {
 
     }
 
-    @Then("user searched for same shortname {string} in offers page and extracted actual name of product")
+    @Then("^user searched for same shortname (.+) in offers page and extracted actual name of product$")
     public void user_searched_for_same_shortname_in_offers_page_to_check_if_product_exist(String shortName) throws InterruptedException {
         switchToOffersPage();
         OffersPage offersPage = testContextSetup.pageObjectManager.getOffersPage();
