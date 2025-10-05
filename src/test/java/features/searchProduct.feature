@@ -1,3 +1,7 @@
+# Feature: Search and Place the Order for Products
+# This feature verifies the search functionality across both the Landing Page and Offers Page.
+# It ensures that a product searched by its short name is consistent across pages and can be validated.
+
 Feature: Search and Place the Order for Products
 
   @SearchTest
