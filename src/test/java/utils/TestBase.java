@@ -2,6 +2,8 @@ package utils;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.Duration;
@@ -17,16 +19,21 @@ public class TestBase {
         Properties properties = new Properties();
         properties.load(fileInputStream);
         String url = properties.getProperty("QAUrl");
+        String browser_properties = properties.getProperty("browser");
+        String browser_maven = System.getProperty("browser");
+
+        String executingBrowser = browser_maven!=null ? browser_maven : browser_properties;
 
         if (driver==null){
-            if (properties.getProperty("browser").equalsIgnoreCase("chrome")){
-                System.setProperty("webdriver.chrome,driver", System.getProperty("user.dir")+"\\src\\main\\resources\\ChormeDriver\\chromedriver.exe");
+            if (executingBrowser.equalsIgnoreCase("chrome")){
+                System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"\\src\\main\\resources\\ChormeDriver\\chromedriver.exe");
                 driver = new ChromeDriver();
             }
-            if (properties.getProperty("browser").equalsIgnoreCase("firefox")) {
-                //firefox code
+            if (executingBrowser.equalsIgnoreCase("firefox")) {
+                System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir")+"\\src\\main\\resources\\GeckoDriver\\geckodriver.exe");
+                driver = new FirefoxDriver();
             }
-            if (properties.getProperty("browser").equalsIgnoreCase("edge")) {
+            if (executingBrowser.equalsIgnoreCase("edge")) {
                 //edge code
             }
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
